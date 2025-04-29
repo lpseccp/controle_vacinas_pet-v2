@@ -2,35 +2,22 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🐶 Controle de Vacinas e Cuidados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meus Pets</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon-192.png" type="image/png" />
 </head>
 <body>
   <div class="container">
-    <h1>🐾 Controle de Vacinas e Cuidados</h1>
+    <h1>Meus Pets</h1>
 
-    <div class="controls">
-      <button id="addPet" class="btn">+ Novo Pet</button>
-      <select id="petSelector"></select>
+    <div class="input-group">
+      <input type="text" id="petName" placeholder="Nome do Pet" />
+      <button onclick="addPet()">Salvar Novo Pet</button>
     </div>
 
-    <div id="petsContainer"></div>
+    <h2>Selecionar Pet</h2>
+    <ul id="petList" class="pet-list"></ul>
   </div>
-
-  <template id="pet-template">
-    <div class="pet-card">
-      <h2>🐕 Novo Pet</h2>
-      <label>Nome: <input type="text" class="pet-name" /></label>
-      <label>Espécie: <input type="text" class="pet-species" /></label>
-      <label>Raça: <input type="text" class="pet-breed" /></label>
-      <label>Data de nascimento: <input type="date" class="pet-birthdate" /></label>
-      <label>Altura: <input type="text" class="pet-height" /></label>
-      <button class="btn savePet">Salvar Pet</button>
-    </div>
-  </template>
 
   <script src="script.js"></script>
 </body>
