@@ -8,14 +8,15 @@
 </head>
 <body>
   <div class="container">
-    <h1>Meus Pets</h1>
+    <h1 class="titulo-centralizado">Meus Pets</h1>
 
     <div class="input-group">
-      <input type="text" id="petName" placeholder="Nome do Pet" />
-      <button onclick="addPet()">Salvar Novo Pet</button>
+      <label for="petName">Nome do Pet:</label>
+      <input type="text" id="petName" placeholder="Digite o nome do Pet" />
+      <button type="button" onclick="addPet()">Salvar Novo Pet</button>
     </div>
 
-    <h2>Selecionar Pet</h2>
+    <h2 class="titulo-centralizado">Selecionar Pet</h2>
     <ul id="petList" class="pet-list"></ul>
   </div>
 
