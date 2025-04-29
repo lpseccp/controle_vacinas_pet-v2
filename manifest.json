@@ -1,18 +1,18 @@
 {
-  "name": "Controle de Vacinas e Cuidados dos Pets",
-  "short_name": "Vacinas Pet",
-  "start_url": "./index.html",
+  "name": "Meu Pet",
+  "short_name": "Pet",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
+  "background_color": "#121212",
+  "theme_color": "#1f1f1f",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
