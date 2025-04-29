@@ -1,4 +1,6 @@
 const petsKey = 'petsData';
+
+// Elementos da interface
 const container = document.getElementById('petList');
 const petForm = document.getElementById('petForm');
 const nameInput = document.getElementById('petName');
@@ -10,17 +12,23 @@ const cancelBtn = document.getElementById('cancelPetBtn');
 const registerBtn = document.getElementById('registerPetBtn');
 const newPetBtn = document.getElementById('newPetBtn');
 
-// Pega os dados do localStorage
+// Função para buscar os pets do localStorage
 function getPets() {
-  return JSON.parse(localStorage.getItem(petsKey)) || [];
+  try {
+    const pets = JSON.parse(localStorage.getItem(petsKey));
+    return Array.isArray(pets) ? pets : [];
+  } catch (e) {
+    console.error('Erro ao recuperar pets:', e);
+    return [];
+  }
 }
 
-// Salva os dados no localStorage
+// Função para salvar pets no localStorage
 function savePets(pets) {
   localStorage.setItem(petsKey, JSON.stringify(pets));
 }
 
-// Atualiza a lista na tela inicial
+// Renderiza a lista de pets cadastrados
 function renderPetList() {
   container.innerHTML = '';
   const pets = getPets();
@@ -30,34 +38,34 @@ function renderPetList() {
     return;
   }
 
-  pets.forEach(pet => {
+  pets.forEach((pet) => {
     const card = document.createElement('div');
     card.className = 'pet-card';
     card.innerHTML = `
       <h2>${pet.nome}</h2>
-      <p><strong>Espécie:</strong> ${pet.especie}</p>
-      <p><strong>Raça:</strong> ${pet.raca}</p>
-      <p><strong>Nascimento:</strong> ${pet.nascimento}</p>
-      <p><strong>Altura:</strong> ${pet.altura}</p>
-      <button onclick="openPet('${pet.id}')" class="btn">Adicionar Informações</button>
+      <p><strong>Espécie:</strong> ${pet.especie || '-'}</p>
+      <p><strong>Raça:</strong> ${pet.raca || '-'}</p>
+      <p><strong>Nascimento:</strong> ${pet.nascimento || '-'}</p>
+      <p><strong>Altura:</strong> ${pet.altura || '-'}</p>
+      <button class="btn" onclick="openPet('${pet.id}')">Adicionar Informações</button>
     `;
     container.appendChild(card);
   });
 }
 
 // Mostra o formulário de novo pet
-newPetBtn.addEventListener('click', () => {
+newPetBtn?.addEventListener('click', () => {
   petForm.style.display = 'block';
 });
 
-// Cancela o cadastro
-cancelBtn.addEventListener('click', () => {
-  petForm.style.display = 'none';
+// Cancela o cadastro e limpa o formulário
+cancelBtn?.addEventListener('click', () => {
   petForm.reset();
+  petForm.style.display = 'none';
 });
 
-// Salva o novo pet
-registerBtn.addEventListener('click', () => {
+// Cadastra um novo pet
+registerBtn?.addEventListener('click', () => {
   const nome = nameInput.value.trim();
   const especie = speciesInput.value.trim();
   const raca = breedInput.value.trim();
@@ -90,10 +98,10 @@ registerBtn.addEventListener('click', () => {
   renderPetList();
 });
 
-// Abre a página do pet individual
+// Abre a página individual do pet
 function openPet(id) {
   window.location.href = `pet.html?id=${id}`;
 }
 
-// Inicializa a lista
+// Inicia a listagem ao carregar
 renderPetList();
