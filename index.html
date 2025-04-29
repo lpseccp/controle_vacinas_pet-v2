@@ -7,65 +7,6 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icon-192.png" type="image/png" />
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f0f8ff;
-      color: #333;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 1200px;
-      margin: auto;
-    }
-    h1 {
-      text-align: center;
-      color: #2a9d8f;
-    }
-    .btn {
-      background-color: #2a9d8f;
-      color: white;
-      padding: 10px;
-      border: none;
-      margin: 5px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .pet-card {
-      background-color: #ffffff;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .pet-card h2 {
-      color: #264653;
-    }
-    input, textarea {
-      display: block;
-      margin: 5px 0 15px;
-      padding: 8px;
-      width: 100%;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }
-    .section {
-      margin-top: 20px;
-    }
-    .section h3 {
-      color: #e76f51;
-    }
-    .add-btn {
-      background-color: #f4a261;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
   <div class="container">
@@ -73,6 +14,7 @@
 
     <div class="controls">
       <button id="addPet" class="btn">+ Novo Pet</button>
+      <select id="petSelector"></select>
     </div>
 
     <div id="petsContainer"></div>
@@ -81,80 +23,15 @@
   <template id="pet-template">
     <div class="pet-card">
       <h2>🐕 Novo Pet</h2>
-      <label>Nome: <input type="text" /></label>
-      <label>Espécie: <input type="text" /></label>
-      <label>Raça: <input type="text" /></label>
-      <label>Data de nascimento: <input type="date" /></label>
-      <label>Altura: <input type="text" /></label>
-
-      <div class="section">
-        <h3>Vacinas</h3>
-        <div class="vacinas"></div>
-        <button class="add-btn" onclick="addVacina(this)">+ Adicionar Vacina</button>
-      </div>
-
-      <div class="section">
-        <h3>Remédios</h3>
-        <div class="remedios"></div>
-        <button class="add-btn" onclick="addRemedio(this)">+ Adicionar Remédio</button>
-      </div>
-
-      <div class="section">
-        <h3>Consultas e Exames</h3>
-        <div class="consultas"></div>
-        <button class="add-btn" onclick="addConsulta(this)">+ Adicionar Consulta</button>
-      </div>
+      <label>Nome: <input type="text" class="pet-name" /></label>
+      <label>Espécie: <input type="text" class="pet-species" /></label>
+      <label>Raça: <input type="text" class="pet-breed" /></label>
+      <label>Data de nascimento: <input type="date" class="pet-birthdate" /></label>
+      <label>Altura: <input type="text" class="pet-height" /></label>
+      <button class="btn savePet">Salvar Pet</button>
     </div>
   </template>
 
-  <script>
-    const addPetBtn = document.getElementById('addPet');
-    const petsContainer = document.getElementById('petsContainer');
-    const petTemplate = document.getElementById('pet-template');
-
-    addPetBtn.addEventListener('click', () => {
-      const clone = petTemplate.content.cloneNode(true);
-      petsContainer.appendChild(clone);
-    });
-
-    function addVacina(btn) {
-      const container = btn.previousElementSibling;
-      const div = document.createElement('div');
-      div.innerHTML = `
-        <label>Tipo: <input type="text" /></label>
-        <label>Data: <input type="date" /></label>
-        <label>Peso: <input type="text" /></label>
-        <label>Dose: <input type="text" /></label>
-        <label>Marca: <input type="text" /></label>
-        <label>Próxima Data: <input type="date" /></label>
-      `;
-      container.appendChild(div);
-    }
-
-    function addRemedio(btn) {
-      const container = btn.previousElementSibling;
-      const div = document.createElement('div');
-      div.innerHTML = `
-        <label>Nome: <input type="text" /></label>
-        <label>Data: <input type="date" /></label>
-        <label>Peso: <input type="text" /></label>
-        <label>Dose: <input type="text" /></label>
-        <label>Marca: <input type="text" /></label>
-        <label>Próxima Data: <input type="date" /></label>
-      `;
-      container.appendChild(div);
-    }
-
-    function addConsulta(btn) {
-      const container = btn.previousElementSibling;
-      const div = document.createElement('div');
-      div.innerHTML = `
-        <label>Exame: <input type="text" /></label>
-        <label>Data: <input type="date" /></label>
-        <label>Observações / Tratamento: <textarea></textarea></label>
-      `;
-      container.appendChild(div);
-    }
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
