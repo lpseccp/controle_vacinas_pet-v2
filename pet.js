@@ -1,45 +1,68 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Detalhes do Pet</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1 id="petTitle">Detalhes do Pet</h1>
+// Função para carregar os dados salvos ao abrir a página
+document.addEventListener("DOMContentLoaded", () => {
+  const petName = localStorage.getItem("petSelecionado");
+  if (petName) {
+    document.getElementById("petTitle").textContent = `Detalhes de ${petName}`;
+    carregarDados("vacinas");
+    carregarDados("remedios");
+    carregarDados("consultas");
+  } else {
+    document.getElementById("petTitle").textContent = "Pet não encontrado";
+  }
+});
 
-    <div class="info-section">
-      <h2>Vacinas</h2>
-      <div class="input-group">
-        <input type="text" id="vaccineInput" placeholder="Adicionar vacina" />
-        <button onclick="addInfo('vacinas')">Salvar Vacina</button>
-      </div>
-      <ul id="vacinasList"></ul>
-    </div>
+// Adiciona informação à lista (vacinas, remédios ou consultas)
+function addInfo(tipo) {
+  const inputId = {
+    vacinas: "vaccineInput",
+    remedios: "medicineInput",
+    consultas: "consultationInput"
+  }[tipo];
 
-    <div class="info-section">
-      <h2>Remédios</h2>
-      <div class="input-group">
-        <input type="text" id="medicineInput" placeholder="Adicionar remédio" />
-        <button onclick="addInfo('remedios')">Salvar Remédio</button>
-      </div>
-      <ul id="remediosList"></ul>
-    </div>
+  const input = document.getElementById(inputId);
+  const valor = input.value.trim();
 
-    <div class="info-section">
-      <h2>Consultas</h2>
-      <div class="input-group">
-        <input type="text" id="consultationInput" placeholder="Adicionar consulta" />
-        <button onclick="addInfo('consultas')">Salvar Consulta</button>
-      </div>
-      <ul id="consultasList"></ul>
-    </div>
+  if (valor === "") {
+    alert("Por favor, digite algo.");
+    return;
+  }
 
-    <button onclick="voltarInicio()">Voltar</button>
-  </div>
+  const key = `${localStorage.getItem("petSelecionado")}_${tipo}`;
+  const dados = JSON.parse(localStorage.getItem(key)) || [];
 
-  <script src="script.js"></script>
-</body>
-</html>
+  dados.push(valor);
+  localStorage.setItem(key, JSON.stringify(dados));
+
+  input.value = "";
+  carregarDados(tipo);
+}
+
+// Carrega os dados do tipo (vacinas, remédios ou consultas) e exibe na lista
+function carregarDados(tipo) {
+  const key = `${localStorage.getItem("petSelecionado")}_${tipo}`;
+  const dados = JSON.parse(localStorage.getItem(key)) || [];
+  const lista = document.getElementById(`${tipo}List`);
+
+  lista.innerHTML = ""; // Limpa lista antes de exibir novamente
+
+  dados.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+
+    // Botão de remover item
+    li.addEventListener("click", () => {
+      if (confirm("Deseja remover este item?")) {
+        dados.splice(index, 1);
+        localStorage.setItem(key, JSON.stringify(dados));
+        carregarDados(tipo);
+      }
+    });
+
+    lista.appendChild(li);
+  });
+}
+
+// Função para voltar à tela inicial
+function voltarInicio() {
+  window.location.href = "index.html";
+}
