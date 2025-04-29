@@ -17,14 +17,14 @@ body {
   padding: 2rem;
 }
 
-/* Container centralizado */
+/* Container principal */
 .container {
   width: 100%;
   max-width: 800px;
   background-color: #1f1f1f;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Títulos */
@@ -34,63 +34,91 @@ h1, h2 {
   color: #90caf9;
 }
 
-/* Formulários e inputs */
-form,
+/* Formulário */
+form {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .input-group {
-  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-input[type="text"] {
+label {
+  font-weight: bold;
+  color: #b0bec5;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
   padding: 0.6rem;
   border: none;
   border-radius: 6px;
   background-color: #2a2a2a;
-  color: #fff;
+  color: #ffffff;
+  font-size: 1rem;
 }
 
+/* Botões */
 button {
-  padding: 0.6rem;
+  padding: 0.7rem;
   background-color: #03a9f4;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 button:hover {
   background-color: #0288d1;
 }
 
-/* Lista de pets */
-.pet-list {
-  list-style: none;
-  padding: 0;
+/* Botões específicos */
+.btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
 }
 
-.pet-list li {
+/* Cartões de pets */
+.pet-card {
   background-color: #292929;
-  margin: 0.5rem 0;
+  margin-bottom: 1rem;
   padding: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
 }
 
-.pet-list li:hover {
-  background-color: #333;
+.pet-card:hover {
+  background-color: #333333;
 }
 
-/* Campos separados (pet.html) */
+.pet-card h2 {
+  color: #4fc3f7;
+  margin-bottom: 0.5rem;
+}
+
+.pet-card p {
+  margin: 0.3rem 0;
+}
+
+/* Página individual do pet */
 .info-section {
   margin-bottom: 2rem;
 }
 
 .info-section h2 {
   color: #81d4fa;
+  border-bottom: 1px solid #333;
+  padding-bottom: 0.3rem;
 }
 
 ul {
@@ -106,9 +134,18 @@ ul li {
   margin-bottom: 0.5rem;
 }
 
-/* Responsivo */
+/* Responsividade */
 @media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+
   .container {
     padding: 1rem;
+  }
+
+  form,
+  .input-group {
+    gap: 0.8rem;
   }
 }
